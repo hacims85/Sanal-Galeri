@@ -1,0 +1,78 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: rgb(14,13,13);
+    background: linear-gradient(101deg, rgba(14,13,13,1) 51%, rgba(166,4,4,1) 94%);
+}
+
+.adminPanelLogin {
+}
+
+    .adminPanelLogin .container {
+        width: 500px;
+        height: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 150px;
+    }
+
+        .adminPanelLogin .container .title {
+            color: whitesmoke;
+            text-align: center;
+            padding: 15px;
+        }
+
+            .adminPanelLogin .container .title h1 {
+                padding: 10px;
+                font-family: 'Michroma', sans-serif;
+            }
+
+        .adminPanelLogin .container .row {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-left: -11px;
+        }
+
+            .adminPanelLogin .container .row .inputbox {
+                outline: none;
+                color: white;
+                background: rgb(96,88,88);
+                background: linear-gradient(101deg, rgba(96,88,88,1) 51%, rgba(166,4,4,1) 94%);
+                width: 430px;
+                padding: 12px;
+                border: none;
+                border: 2px solid #808080;
+            }
+
+            .adminPanelLogin .container .row i {
+                color: white;
+                margin-left: -23px;
+            }
+
+            .adminPanelLogin .container .row .loginBtn {
+                text-decoration: none;
+                display: block;
+                width: 90px;
+                padding: 10px;
+                background-color: whitesmoke;
+                margin-left: 32px;
+                margin-top: 20px;
+                color: #242424;
+                font-weight: 900;
+                font-size: 15pt;
+                border-radius: 2px;
+            }
+
+            .adminPanelLogin .container .row .forgetPassword {
+                float: right;
+                margin-top: 25px;
+                margin-right: 24px;
+            }
+
+                .adminPanelLogin .container .row .forgetPassword a {
+                    text-decoration: none;
+                    color: whitesmoke;
+                }
