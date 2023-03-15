@@ -1,0 +1,268 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B02CBE5A-7430-4441-83BF-98D7F889D92F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SanalGaleri</RootNamespace>
+    <AssemblyName>SanalGaleri</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44366</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdminPanel\AddAgeRange.aspx" />
+    <Content Include="AdminPanel\AddArtCategories.aspx" />
+    <Content Include="AdminPanel\AddComplaintReasons.aspx" />
+    <Content Include="AdminPanel\AddSecurityQestions.aspx" />
+    <Content Include="AdminPanel\ArtworkDetails.aspx" />
+    <Content Include="AdminPanel\Assets\Css\MainLayout.css" />
+    <Content Include="AdminPanel\Assets\images\Logo.png" />
+    <Content Include="AdminPanel\CommentDetail.aspx" />
+    <Content Include="AdminPanel\ComplaintsProcesses.aspx" />
+    <Content Include="AdminPanel\Default.aspx" />
+    <Content Include="AdminPanel\ApprovalProcesses.aspx" />
+    <Content Include="AdminPanel\EditAgeRange.aspx" />
+    <Content Include="AdminPanel\EditArtworkCategories.aspx" />
+    <Content Include="AdminPanel\EditComplaintReason.aspx" />
+    <Content Include="AdminPanel\EditProcesses.aspx" />
+    <Content Include="AdminPanel\EditSecurityQestions.aspx" />
+    <Content Include="AdminPanel\MemberProcesses.aspx" />
+    <Content Include="AdminPanel\Requests.aspx" />
+    <Content Include="Images\none.png" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminPanel\AddAgeRange.aspx.cs">
+      <DependentUpon>AddAgeRange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\AddAgeRange.aspx.designer.cs">
+      <DependentUpon>AddAgeRange.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\AddArtCategories.aspx.cs">
+      <DependentUpon>AddArtCategories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\AddArtCategories.aspx.designer.cs">
+      <DependentUpon>AddArtCategories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\AddComplaintReasons.aspx.cs">
+      <DependentUpon>AddComplaintReasons.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\AddComplaintReasons.aspx.designer.cs">
+      <DependentUpon>AddComplaintReasons.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\AddSecurityQestions.aspx.cs">
+      <DependentUpon>AddSecurityQestions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\AddSecurityQestions.aspx.designer.cs">
+      <DependentUpon>AddSecurityQestions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\AdminMasterPage.Master.cs">
+      <DependentUpon>AdminMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\AdminMasterPage.Master.designer.cs">
+      <DependentUpon>AdminMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\ArtworkDetails.aspx.cs">
+      <DependentUpon>ArtworkDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\ArtworkDetails.aspx.designer.cs">
+      <DependentUpon>ArtworkDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\CommentDetail.aspx.cs">
+      <DependentUpon>CommentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\CommentDetail.aspx.designer.cs">
+      <DependentUpon>CommentDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\ComplaintsProcesses.aspx.cs">
+      <DependentUpon>ComplaintsProcesses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\ComplaintsProcesses.aspx.designer.cs">
+      <DependentUpon>ComplaintsProcesses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\ApprovalProcesses.aspx.cs">
+      <DependentUpon>ApprovalProcesses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\ApprovalProcesses.aspx.designer.cs">
+      <DependentUpon>ApprovalProcesses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\EditAgeRange.aspx.cs">
+      <DependentUpon>EditAgeRange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\EditAgeRange.aspx.designer.cs">
+      <DependentUpon>EditAgeRange.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\EditArtworkCategories.aspx.cs">
+      <DependentUpon>EditArtworkCategories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\EditArtworkCategories.aspx.designer.cs">
+      <DependentUpon>EditArtworkCategories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\EditComplaintReason.aspx.cs">
+      <DependentUpon>EditComplaintReason.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\EditComplaintReason.aspx.designer.cs">
+      <DependentUpon>EditComplaintReason.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\EditProcesses.aspx.cs">
+      <DependentUpon>EditProcesses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\EditProcesses.aspx.designer.cs">
+      <DependentUpon>EditProcesses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\EditSecurityQestions.aspx.cs">
+      <DependentUpon>EditSecurityQestions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\EditSecurityQestions.aspx.designer.cs">
+      <DependentUpon>EditSecurityQestions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\MemberProcesses.aspx.cs">
+      <DependentUpon>MemberProcesses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\MemberProcesses.aspx.designer.cs">
+      <DependentUpon>MemberProcesses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\Requests.aspx.cs">
+      <DependentUpon>Requests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\Requests.aspx.designer.cs">
+      <DependentUpon>Requests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdminPanel\AdminMasterPage.Master" />
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{838185cb-5b4f-4236-992f-801df1953d6e}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53087</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44366/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

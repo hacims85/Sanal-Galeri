@@ -1,0 +1,59 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminMasterPage.master.cs" Inherits="SanalGaleri.AdminPanel.AdminMasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>SanalGaleri Panel</title>
+    <link href="Assets/Css/MainLayout.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server" style="height: 100%">
+        <div class="header">
+            <a href="Default.aspx">
+                <div class="logo">
+                    <img src="Assets/images/Logo.png" style="width: 200px" />
+                </div>
+
+            </a>
+
+            <div class="caption">
+                <h1>SANAL GALERİ</h1>
+            </div>
+            <div class="UserInfo">
+                <asp:Label ID="lbl_user" runat="server"></asp:Label>
+                <asp:LinkButton ID="lbtn_exit" runat="server" OnClick="lbtn_exit_Click">Çıkış</asp:LinkButton>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="container">
+            <div class="sidebar">
+                <ul>
+                    <a href="ApprovalProcesses.aspx">
+                        <li style="border-top: 1px solid silver">Onay İşlemleri</li>
+                    </a>
+                    <a href="ComplaintsProcesses.aspx">
+                        <li>Şikayet İşlemleri</li>
+                    </a>
+                    <a href="Requests.aspx">
+                        <li>Talepler</li>
+                    </a>
+                    <a href="MemberProcesses.aspx">
+                        <li>Üye İşlemleri</li>
+                    </a>
+                    <a href="EditProcesses.aspx">
+                        <li>Düzenleme İşlemleri</li>
+                    </a>
+                </ul>
+            </div>
+            <div class="content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

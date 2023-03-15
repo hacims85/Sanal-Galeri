@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanalGaleri", "SanalGaleri\SanalGaleri.csproj", "{B02CBE5A-7430-4441-83BF-98D7F889D92F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{838185CB-5B4F-4236-992F-801DF1953D6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B02CBE5A-7430-4441-83BF-98D7F889D92F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B02CBE5A-7430-4441-83BF-98D7F889D92F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B02CBE5A-7430-4441-83BF-98D7F889D92F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B02CBE5A-7430-4441-83BF-98D7F889D92F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{838185CB-5B4F-4236-992F-801DF1953D6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{838185CB-5B4F-4236-992F-801DF1953D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{838185CB-5B4F-4236-992F-801DF1953D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{838185CB-5B4F-4236-992F-801DF1953D6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {490E1B68-ED37-4BC3-BDAA-B3AD862B5428}
+	EndGlobalSection
+EndGlobal

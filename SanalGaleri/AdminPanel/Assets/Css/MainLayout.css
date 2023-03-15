@@ -1,0 +1,252 @@
+﻿*, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+}
+
+
+/*MasterPage*/
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: darkred;
+    height: 106px;
+}
+
+.caption {
+    font-size: 30pt;
+    padding-top: 10px;
+}
+
+.UserInfo {
+    padding: 45px 10px;
+}
+
+    .UserInfo a {
+        text-decoration: none;
+        background-color: black;
+        color: whitesmoke;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+        .UserInfo a:hover {
+            background-color: gray;
+        }
+
+.container {
+    height: calc(100% - 106px);
+}
+
+    .container .sidebar {
+        background-color: gray;
+        float: left;
+        width: 20%;
+        height: 100%;
+    }
+
+        .container .sidebar ul {
+            list-style: none;
+            margin-top: 150px;
+        }
+
+            .container .sidebar ul a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .container .sidebar ul li {
+                font-size: 20pt;
+                display: flex;
+                padding: 20px;
+                border-bottom: 1px solid silver;
+            }
+
+            .container .sidebar ul a:hover {
+                color: darkred;
+            }
+
+
+/*ApprovalProcesses*/
+.content {
+    width: 80%;
+    float: right;
+}
+
+.contentContainer {
+    width: 100%;
+}
+
+.buttons {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    background-color: silver;
+    display: flex;
+    justify-content: space-around;
+}
+
+    /*#ContentPlaceHolder1_lbtn_comments {
+    float: left;
+    margin-left: 300px;
+}
+
+#ContentPlaceHolder1_lbtn_artworks {
+    float: right;
+    margin-right: 300px;
+}*/
+
+    .buttons .button {
+        text-decoration: none;
+        color: black;
+        border: 1px solid white;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 20pt;
+    }
+
+        .buttons .button:hover {
+            color: red;
+            border-color: red;
+        }
+/*Tablolar*/
+table {
+    width: 70%;
+    margin: 50px auto;
+}
+
+.table td {
+    text-align: center;
+    padding: 4px;
+}
+
+table td a {
+    text-decoration: none;
+    color: black;
+    border: 1px solid silver;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 3px;
+    margin: 3px 10px;
+}
+
+    table td a:hover {
+        color: red;
+        background-color: gray;
+    }
+
+/*Requests*/
+h2 {
+    background-color: silver;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 35pt;
+    font-weight: 900;
+}
+/*EditProcesses*/
+.addButton {
+    display: flex;
+    justify-content: center;
+}
+
+    .addButton a {
+        text-decoration: none;
+        border: 2px solid gray;
+        padding: 5px;
+        border-radius: 10px;
+        color: black;
+    }
+
+        .addButton a:hover {
+            color: darkred;
+            border-color: darkred;
+            background-color: whitesmoke;
+        }
+
+/*AddPages*/
+
+.addPage {
+    width: 500px;
+    border: 1px solid gray;
+    margin: 50px auto;
+}
+
+    .addPage h3 {
+        margin: 50px 0 20px;
+        text-align: center
+    }
+
+    .addPage .textContent {
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+    }
+
+        .addPage .textContent label {
+            margin-right: 10px;
+        }
+
+    .addPage .singleAddButton {
+        text-align: center;
+        margin: 30px 0 30px;
+    }
+
+    .addPage a {
+        text-decoration: none;
+        color: black;
+        border: 1px solid silver;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: silver;
+    }
+
+        .addPage a:hover {
+            color: red;
+        }
+
+    .addPage .successfulpnl {
+        background-color: #d4fca7;
+        color: #1d7105;
+        padding: 20px;
+        -webkit-box-shadow: inset 0px 15px 5px -7px rgba(0,0,0,0.34);
+        -moz-box-shadow: inset 0px 15px 5px -7px rgba(0,0,0,0.34);
+        box-shadow: inset 0px 15px 5px -7px rgba(0,0,0,0.34);
+    }
+
+    .addPage .unsuccessfulpnl {
+        background-color: #febfbf;
+        color: red;
+        padding: 20px;
+        -webkit-box-shadow: inset 0px 15px 5px -7px rgba(0,0,0,0.34);
+        -moz-box-shadow: inset 0px 15px 5px -7px rgba(0,0,0,0.34);
+        box-shadow: inset 0px 15px 5px -7px rgba(0,0,0,0.34);
+    }
+/*Detail Pages*/
+.coverImg {
+    width: 300px;
+    margin: 20px auto;
+}
+
+    .coverImg img {
+        width: 300px;
+    }
+
+.detailPageContainer {
+    width: 50%;
+    margin: 20px auto;
+    border: 1px solid silver;
+}
+
+    .detailPageContainer .commentNumbers {
+        margin: 5px 10px;
+        font-size: 20pt;
+    }
+
+    .detailPageContainer .detailPageContent {
+        margin: 40px 45px;
+        border: 1px solid gray;
+    }
