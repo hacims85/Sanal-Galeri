@@ -28,28 +28,33 @@ namespace DataAccessLayer
             List<Members> members = new List<Members>();
             try
             {
-                cmd.CommandText = "SELECT m.ID,m.Name,m.Surname,ms.Name,m.ProfilPhoto,m.Info,m.Email,m.Birthday,m.Username,m.UserPassword,m.VisitorCounts,m.RegistrationDate,m.UserStatus FROM Members AS m JOIN MembershipStatus AS ms ON m.MembershipStatus_ID=ms.ID";
+                cmd.CommandText = "SELECT mem.ID,mem.Name,mem.Surname,mem.MembershipStatus_ID,ms.Name,mem.ProfilPhoto,mem.Info,mem.Email,mem.Birthday,mem.UserName,mem.UserPassword,mem.SecurityQestions_ID,sq.Qestions,mem.SecurityAnswer,mem.VisitorCounts,mem.RegistrationDate,mem.UserStatus FROM Members AS mem JOIN MembershipStatus AS ms ON mem.MembershipStatus_ID=ms.ID JOIN SecurityQestions AS sq ON mem.SecurityQestions_ID=sq.ID";
                 cmd.Parameters.Clear();
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    Members m = new Members();
-                    m.ID = reader.GetInt32(0);
-                    m.Name = reader.GetString(1);
-                    m.Surname = reader.GetString(2);
-                    m.MembershipStatusName = reader.GetString(3);
-                    m.ProfilPhoto = !reader.IsDBNull(4) ? reader.GetString(4) : "none.png";
-                    m.Info = reader.GetString(5);
-                    m.Email = reader.GetString(6);
-                    m.BirthdayStr = reader.GetDateTime(7).ToShortDateString();
-                    m.UserName = reader.GetString(8);
-                    m.UserPassword = reader.GetString(9);
-                    m.VisitorCounts = reader.GetInt32(10);
-                    m.RegistrationDateStr = reader.GetDateTime(11).ToShortDateString();
-                    m.RegistrationTimeStr = reader.GetDateTime(11).ToShortTimeString();
-                    m.UserStatusStr = reader.GetBoolean(12) ? "<label style='color:green'>Aktif</label>" : "<label style='color:gray'>Pasif</label>";
-                    members.Add(m);
+                    Members mem = new Members();
+                    mem.ID = reader.GetInt32(0);
+                    mem.Name = reader.GetString(1);
+                    mem.Surname = reader.GetString(2);
+                    mem.MembershipStatusID = reader.GetInt32(3);
+                    mem.MembershipStatusName = reader.GetString(4);
+                    mem.ProfilPhoto = !reader.IsDBNull(5) ? reader.GetString(5) : "none.png";
+                    mem.Info = reader.GetString(6);
+                    mem.Email = reader.GetString(7);
+                    mem.BirthdayStr = reader.GetDateTime(8).ToShortDateString();
+                    mem.UserName = reader.GetString(9);
+                    mem.UserPassword = reader.GetString(10);
+                    mem.SecurityQestionsID = reader.GetInt32(11);
+                    mem.SecurityQestionsQestion = reader.GetString(12);
+                    mem.SecurityAnswer = reader.GetString(13);
+                    mem.VisitorCounts = reader.GetInt32(14);
+                    mem.RegistrationDate = reader.GetDateTime(15);
+                    mem.RegistrationDateStr = reader.GetDateTime(15).ToShortDateString();
+                    mem.RegistrationTimeStr = reader.GetDateTime(15).ToShortTimeString();
+                    mem.UserStatusStr = reader.GetBoolean(16) ? "<label style='color:green'>Aktif</label>" : "<label style='color:gray'>Pasif</label>";
+                    members.Add(mem);
                 }
                 return members;
             }
@@ -76,6 +81,47 @@ namespace DataAccessLayer
             {
 
                 return false;
+            }
+            finally { con.Close(); }
+        }
+        public Members GetMemberByID(int memid)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT mem.ID,mem.Name,mem.Surname,mem.MembershipStatus_ID,ms.Name,mem.ProfilPhoto,mem.Info,mem.Email,mem.Birthday,mem.UserName,mem.UserPassword,mem.SecurityQestions_ID,sq.Qestions,mem.SecurityAnswer,mem.VisitorCounts,mem.RegistrationDate,mem.UserStatus FROM Members AS mem JOIN MembershipStatus AS ms ON mem.MembershipStatus_ID=ms.ID JOIN SecurityQestions AS sq ON mem.SecurityQestions_ID=sq.ID WHERE mem.ID=@memid";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@memid", memid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                Members mem = new Members();
+                while (reader.Read())
+                {
+                    mem.ID = reader.GetInt32(0);
+                    mem.Name = reader.GetString(1);
+                    mem.Surname = reader.GetString(2);
+                    mem.MembershipStatusID = reader.GetInt32(3);
+                    mem.MembershipStatusName = reader.GetString(4);
+                    mem.ProfilPhoto = !reader.IsDBNull(5) ? reader.GetString(5) : "none.png";
+                    mem.Info = reader.GetString(6);
+                    mem.Email = reader.GetString(7);
+                    mem.BirthdayStr = reader.GetDateTime(8).ToShortDateString();
+                    mem.UserName = reader.GetString(9);
+                    mem.UserPassword = reader.GetString(10);
+                    mem.SecurityQestionsID = reader.GetInt32(11);
+                    mem.SecurityQestionsQestion = reader.GetString(12);
+                    mem.SecurityAnswer = reader.GetString(13);
+                    mem.VisitorCounts = reader.GetInt32(14);
+                    mem.RegistrationDate = reader.GetDateTime(15);
+                    mem.RegistrationDateStr = reader.GetDateTime(15).ToShortDateString();
+                    mem.RegistrationTimeStr = reader.GetDateTime(15).ToShortTimeString();
+                    mem.UserStatusStr = reader.GetBoolean(16) ? "<label style='color:green'>Aktif</label>" : "<label style='color:gray'>Pasif</label>";
+                }
+                return mem;
+            }
+            catch
+            {
+
+                return null;
             }
             finally { con.Close(); }
         }
@@ -576,6 +622,43 @@ namespace DataAccessLayer
             finally { con.Close(); }
 
         }
+        public bool CommentsSoftDelete(int cid)
+        {
+            try
+            {
+                cmd.CommandText = "UPDATE Comments SET CommentStatus=0 WHERE ID=@cid";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@cid", cid);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch
+            {
+
+                return false;
+            }
+            finally { con.Close(); }
+        }
+        public bool SoftDeleteAnswers(int cid)
+        {
+            try
+            {
+                cmd.CommandText = "UPDATE Comments SET CommentStatus=0 WHERE Comments_ID=@cid";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@cid", cid);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+            finally { con.Close(); }
+        }
         #endregion
         #region Complaints Transactions
 
@@ -605,6 +688,7 @@ namespace DataAccessLayer
                     c.ComplainantUserName = reader.GetString(11);
                     c.AnswerStatusID = reader.GetInt32(12);
                     c.AnswerStatusName = reader.GetString(13);
+                    c.ComplainantDate = reader.GetDateTime(14);
                     c.ComplainantDateStr = reader.GetDateTime(14).ToShortDateString();
                     c.ComplainantTimeStr = reader.GetDateTime(14).ToShortTimeString();
 
@@ -646,6 +730,7 @@ namespace DataAccessLayer
                     c.ComplainantUserName = reader.GetString(11);
                     c.AnswerStatusID = reader.GetInt32(12);
                     c.AnswerStatusName = reader.GetString(13);
+                    c.ComplainantDate = reader.GetDateTime(14);
                     c.ComplainantDateStr = reader.GetDateTime(14).ToShortDateString();
                     c.ComplainantTimeStr = reader.GetDateTime(14).ToShortTimeString();
 
@@ -665,7 +750,7 @@ namespace DataAccessLayer
             List<Complaints> list = new List<Complaints>();
             try
             {
-                cmd.CommandText = "SELECT com.ID,com.Explanation,com.ComplaintReason_ID,cr.Reason,com.Comment_ID,c.Contents,com.Complainant_ID,cm.Name,cm.UserName,com.AnswerStatus_ID,ans.Name,com.ComplaintDate FROM Complaints AS com JOIN ComplaintReasons AS cr ON com.ComplaintReason_ID=cr.ID JOIN Comments AS c ON com.Comment_ID=c.ID JOIN Members AS cm ON com.Complainant_ID=cm.ID JOIN AnswerStatus AS ans ON com.AnswerStatus_ID=ans.ID";
+                cmd.CommandText = "SELECT com.ID,com.Explanation,com.ComplaintReason_ID,cr.Reason,com.Comment_ID,c.Contents,com.Complainant_ID,cm.Name,cm.UserName,com.AnswerStatus_ID,ans.Name,com.ComplaintDate FROM Complaints AS com JOIN ComplaintReasons AS cr ON com.ComplaintReason_ID=cr.ID JOIN Comments AS c ON com.Comment_ID=c.ID JOIN Members AS cm ON com.Complainant_ID=cm.ID JOIN AnswerStatus AS ans ON com.AnswerStatus_ID=ans.ID WHERE com.AnswerStatus_ID=1";
                 cmd.Parameters.Clear();
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -683,6 +768,7 @@ namespace DataAccessLayer
                     com.ComplainantUserName = reader.GetString(8);
                     com.AnswerStatusID = reader.GetInt32(9);
                     com.AnswerStatusName = reader.GetString(10);
+                    com.ComplainantDate = reader.GetDateTime(11);
                     com.ComplainantDateStr = reader.GetDateTime(11).ToShortDateString();
                     com.ComplainantTimeStr = reader.GetDateTime(11).ToShortTimeString();
                     list.Add(com);
@@ -721,6 +807,46 @@ namespace DataAccessLayer
                     com.ComplainantUserName = reader.GetString(8);
                     com.AnswerStatusID = reader.GetInt32(9);
                     com.AnswerStatusName = reader.GetString(10);
+                    com.ComplainantDate = reader.GetDateTime(11);
+                    com.ComplainantDateStr = reader.GetDateTime(11).ToShortDateString();
+                    com.ComplainantTimeStr = reader.GetDateTime(11).ToShortTimeString();
+                    list.Add(com);
+                }
+                return list;
+
+            }
+            catch
+            {
+
+                return null;
+            }
+            finally { con.Close(); }
+        }
+        public List<Complaints> ListCommendComplaintsNotAcceptedCommendStatus(int cstatus)
+        {
+            List<Complaints> list = new List<Complaints>();
+            try
+            {
+                cmd.CommandText = "SELECT com.ID,com.Explanation,com.ComplaintReason_ID,cr.Reason,com.Comment_ID,c.CommentStatus,com.Complainant_ID,cm.Name,cm.UserName,com.AnswerStatus_ID,ans.Name,com.ComplaintDate FROM Complaints AS com JOIN ComplaintReasons AS cr ON com.ComplaintReason_ID=cr.ID JOIN Comments AS c ON com.Comment_ID=c.ID JOIN Members AS cm ON com.Complainant_ID=cm.ID JOIN AnswerStatus AS ans ON com.AnswerStatus_ID=ans.ID WHERE com.AnswerStatus_ID=1 c.CommentStatus=@cstatus";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@ansid", cstatus);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Complaints com = new Complaints();
+                    com.ID = reader.GetInt32(0);
+                    com.Explanation = reader.GetString(1);
+                    com.ComplaintReasonID = reader.GetInt32(2);
+                    com.ComplaintReason = reader.GetString(3);
+                    com.CommentID = reader.GetInt32(4);
+                    com.CommentStatus = reader.GetBoolean(5);
+                    com.ComplainantID = reader.GetInt32(6);
+                    com.ComplainantName = reader.GetString(7);
+                    com.ComplainantUserName = reader.GetString(8);
+                    com.AnswerStatusID = reader.GetInt32(9);
+                    com.AnswerStatusName = reader.GetString(10);
+                    com.ComplainantDate = reader.GetDateTime(11);
                     com.ComplainantDateStr = reader.GetDateTime(11).ToShortDateString();
                     com.ComplainantTimeStr = reader.GetDateTime(11).ToShortTimeString();
                     list.Add(com);
@@ -889,6 +1015,100 @@ namespace DataAccessLayer
             }
             finally { con.Close(); }
         }
+        public Complaints GetCommendComplaintNotAccepted(int comid)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT com.ID,com.Explanation,com.ComplaintReason_ID,cr.Reason,com.Comment_ID,c.Contents,com.Complainant_ID,cm.Name,cm.UserName,com.AnswerStatus_ID,ans.Name,com.ComplaintDate FROM Complaints AS com JOIN ComplaintReasons AS cr ON com.ComplaintReason_ID=cr.ID JOIN Comments AS c ON com.Comment_ID=c.ID JOIN Members AS cm ON com.Complainant_ID=cm.ID JOIN AnswerStatus AS ans ON com.AnswerStatus_ID=ans.ID WHERE com.AnswerStatus_ID=1 AND com.ID=@comid";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@comid", comid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                Complaints com = new Complaints();
+                while (reader.Read())
+                {
+                    com.ID = reader.GetInt32(0);
+                    com.Explanation = reader.GetString(1);
+                    com.ComplaintReasonID = reader.GetInt32(2);
+                    com.ComplaintReason = reader.GetString(3);
+                    com.CommentID = reader.GetInt32(4);
+                    com.CommentContent = reader.GetString(5);
+                    com.ComplainantID = reader.GetInt32(6);
+                    com.ComplainantName = reader.GetString(7);
+                    com.ComplainantUserName = reader.GetString(8);
+                    com.AnswerStatusID = reader.GetInt32(9);
+                    com.AnswerStatusName = reader.GetString(10);
+                    com.ComplainantDate = reader.GetDateTime(11);
+                    com.ComplainantDateStr = reader.GetDateTime(11).ToShortDateString();
+                    com.ComplainantTimeStr = reader.GetDateTime(11).ToShortTimeString();
+                }
+                return com;
+            }
+            catch
+            {
+
+                return null;
+            }
+            finally { con.Close(); }
+        }
+        public Complaints GetArtworkComplaintNotAccepted(int comid)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT com.ID,com.Explanation,com.ComplaintReason_ID,cr.Reason,com.Artwork_ID,aw.Name,com.Complainant_ID,cm.Name,cm.UserName,com.AnswerStatus_ID,ans.Name,com.ComplaintDate FROM Complaints AS com JOIN ComplaintReasons AS cr ON com.ComplaintReason_ID=cr.ID JOIN Artworks AS aw ON com.Artwork_ID=aw.ID JOIN Members AS cm ON com.Complainant_ID=cm.ID JOIN AnswerStatus AS ans ON com.AnswerStatus_ID=ans.ID WHERE com.AnswerStatus_ID=1 AND com.ID=@comid";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@comid", comid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                Complaints com = new Complaints();
+                while (reader.Read())
+                {
+                    com.ID = reader.GetInt32(0);
+                    com.Explanation = reader.GetString(1);
+                    com.ComplaintReasonID = reader.GetInt32(2);
+                    com.ComplaintReason = reader.GetString(3);
+                    com.ArtworkID = reader.GetInt32(4);
+                    com.ArtworkName = reader.GetString(5);
+                    com.ComplainantID = reader.GetInt32(6);
+                    com.ComplainantName = reader.GetString(7);
+                    com.ComplainantUserName = reader.GetString(8);
+                    com.AnswerStatusID = reader.GetInt32(9);
+                    com.AnswerStatusName = reader.GetString(10);
+                    com.ComplainantDate = reader.GetDateTime(11);
+                    com.ComplainantDateStr = reader.GetDateTime(11).ToShortDateString();
+                    com.ComplainantTimeStr = reader.GetDateTime(11).ToShortTimeString();
+                }
+                return com;
+            }
+            catch
+            {
+
+                return null;
+            }
+            finally { con.Close(); }
+        }
+        public bool UpdateComplaintsForAccepted(Complaints com)
+        {
+            try
+            {
+                cmd.CommandText = "UPDATE Complaints SET Approver_ID=@appID, ApprovedDate=@appDate, AnswerStatus_ID=@ansid WHERE ID=@comid";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@appID", com.ApproverID);
+                cmd.Parameters.AddWithValue("@appDate", com.ApprovedDate);
+                cmd.Parameters.AddWithValue("@ansid", com.AnswerStatusID);
+                cmd.Parameters.AddWithValue("@comid", com.ID);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch
+            {
+
+                return false;
+            }
+            finally { con.Close(); }
+        }
 
         #endregion
         #region Artworks Transactions
@@ -898,7 +1118,7 @@ namespace DataAccessLayer
             List<Artworks> artworks = new List<Artworks>();
             try
             {
-                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.Approver_ID,AP.Name,AP.UserName,AW.AgeRange_ID,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.ApprovedDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN Members AS AP ON AW.Approver_ID=AP.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID WHERE AW.AnswerStatus_ID=@ansid";
+                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.Approver_ID,AP.Name,AP.UserName,AW.AgeRange_ID,AR.AgeRange,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.ApprovedDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN Members AS AP ON AW.Approver_ID=AP.ID JOIN AgeRanges AS AR ON AW.AgeRange_ID=AR.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID WHERE AW.AnswerStatus_ID=@ansid";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@ansid", ansid);
                 con.Open();
@@ -918,17 +1138,18 @@ namespace DataAccessLayer
                     a.ApproverName = reader.GetString(9);
                     a.ApproverUserName = reader.GetString(10);
                     a.AgeRangeID = reader.GetInt32(11);
-                    a.LikeCounts = !reader.IsDBNull(12) ? reader.GetInt32(12) : 0;
-                    a.DislikeCounts = !reader.IsDBNull(13) ? reader.GetInt32(13) : 0;
-                    a.ViewsCounts = reader.GetInt32(14);
-                    a.UploadDateTime = reader.GetDateTime(15);
-                    a.UploadDateStr = reader.GetDateTime(15).ToShortDateString();
-                    a.UploadTimeStr = reader.GetDateTime(15).ToShortTimeString();
-                    a.ApprovedDateTime = reader.GetDateTime(16);
-                    a.ApprovedDateStr = !reader.IsDBNull(16) ? reader.GetDateTime(16).ToShortDateString() : reader.GetDateTime(15).ToShortDateString();
-                    a.ApprovedTimeStr = !reader.IsDBNull(16) ? reader.GetDateTime(16).ToShortTimeString() : reader.GetDateTime(15).ToShortTimeString();
-                    a.AnswerStatusID = reader.GetInt32(17);
-                    a.AnswerStatusName = reader.GetString(18);
+                    a.AgeRangeStr = reader.GetString(12);
+                    a.LikeCounts = !reader.IsDBNull(13) ? reader.GetInt32(13) : 0;
+                    a.DislikeCounts = !reader.IsDBNull(14) ? reader.GetInt32(14) : 0;
+                    a.ViewsCounts = reader.GetInt32(15);
+                    a.UploadDateTime = reader.GetDateTime(16);
+                    a.UploadDateStr = reader.GetDateTime(16).ToShortDateString();
+                    a.UploadTimeStr = reader.GetDateTime(16).ToShortTimeString();
+                    a.ApprovedDateTime = reader.GetDateTime(17);
+                    a.ApprovedDateStr = !reader.IsDBNull(17) ? reader.GetDateTime(17).ToShortDateString() : reader.GetDateTime(16).ToShortDateString();
+                    a.ApprovedTimeStr = !reader.IsDBNull(17) ? reader.GetDateTime(17).ToShortTimeString() : reader.GetDateTime(16).ToShortTimeString();
+                    a.AnswerStatusID = reader.GetInt32(18);
+                    a.AnswerStatusName = reader.GetString(19);
                     artworks.Add(a);
                 }
                 return artworks;
@@ -945,7 +1166,7 @@ namespace DataAccessLayer
             List<Artworks> artworks = new List<Artworks>();
             try
             {
-                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.Approver_ID,AP.Name,AP.UserName,AW.AgeRange_ID,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.ApprovedDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN Members AS AP ON AW.Approver_ID=AP.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID";
+                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.Approver_ID,AP.Name,AP.UserName,AW.AgeRange_ID,AR.AgeRange,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.ApprovedDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN Members AS AP ON AW.Approver_ID=AP.ID JOIN AgeRanges AS AR ON AW.AgeRange_ID=AR.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID";
                 cmd.Parameters.Clear();
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -964,17 +1185,18 @@ namespace DataAccessLayer
                     a.ApproverName = reader.GetString(9);
                     a.ApproverUserName = reader.GetString(10);
                     a.AgeRangeID = reader.GetInt32(11);
-                    a.LikeCounts = !reader.IsDBNull(12) ? reader.GetInt32(12) : 0;
-                    a.DislikeCounts = !reader.IsDBNull(13) ? reader.GetInt32(13) : 0;
-                    a.ViewsCounts = reader.GetInt32(14);
-                    a.UploadDateTime = reader.GetDateTime(15);
-                    a.UploadDateStr = reader.GetDateTime(15).ToShortDateString();
-                    a.UploadTimeStr = reader.GetDateTime(15).ToShortTimeString();
-                    a.ApprovedDateTime = reader.GetDateTime(16);
-                    a.ApprovedDateStr = reader.GetDateTime(16).ToShortDateString();
-                    a.ApprovedTimeStr = reader.GetDateTime(16).ToShortTimeString();
-                    a.AnswerStatusID = reader.GetInt32(17);
-                    a.AnswerStatusName = reader.GetString(18);
+                    a.AgeRangeStr = reader.GetString(12);
+                    a.LikeCounts = !reader.IsDBNull(13) ? reader.GetInt32(13) : 0;
+                    a.DislikeCounts = !reader.IsDBNull(14) ? reader.GetInt32(14) : 0;
+                    a.ViewsCounts = reader.GetInt32(15);
+                    a.UploadDateTime = reader.GetDateTime(16);
+                    a.UploadDateStr = reader.GetDateTime(16).ToShortDateString();
+                    a.UploadTimeStr = reader.GetDateTime(16).ToShortTimeString();
+                    a.ApprovedDateTime = reader.GetDateTime(17);
+                    a.ApprovedDateStr = !reader.IsDBNull(17) ? reader.GetDateTime(17).ToShortDateString() : reader.GetDateTime(16).ToShortDateString();
+                    a.ApprovedTimeStr = !reader.IsDBNull(17) ? reader.GetDateTime(17).ToShortTimeString() : reader.GetDateTime(16).ToShortTimeString();
+                    a.AnswerStatusID = reader.GetInt32(18);
+                    a.AnswerStatusName = reader.GetString(19);
                     artworks.Add(a);
                 }
                 return artworks;
@@ -991,7 +1213,7 @@ namespace DataAccessLayer
             List<Artworks> artworks = new List<Artworks>();
             try
             {
-                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.AgeRange_ID,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID WHERE AW.AnswerStatus_ID=@ansid";
+                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.AgeRange_ID,AR.AgeRange,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN AgeRanges AS AR ON AW.AgeRange_ID=AR.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID WHERE AW.AnswerStatus_ID=@ansid";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@ansid", ansid);
                 con.Open();
@@ -1008,14 +1230,15 @@ namespace DataAccessLayer
                     a.UploaderName = reader.GetString(6);
                     a.UploaderUserName = reader.GetString(7);
                     a.AgeRangeID = reader.GetInt32(8);
-                    a.LikeCounts = !reader.IsDBNull(9) ? reader.GetInt32(9) : 0;
-                    a.DislikeCounts = !reader.IsDBNull(10) ? reader.GetInt32(10) : 0;
-                    a.ViewsCounts = reader.GetInt32(11);
-                    a.UploadDateTime = reader.GetDateTime(12);
-                    a.UploadDateStr = reader.GetDateTime(12).ToShortDateString();
-                    a.UploadTimeStr = reader.GetDateTime(12).ToShortTimeString();
-                    a.AnswerStatusID = reader.GetInt32(13);
-                    a.AnswerStatusName = reader.GetString(14);
+                    a.AgeRangeStr = reader.GetString(9);
+                    a.LikeCounts = !reader.IsDBNull(10) ? reader.GetInt32(10) : 0;
+                    a.DislikeCounts = !reader.IsDBNull(11) ? reader.GetInt32(11) : 0;
+                    a.ViewsCounts = reader.GetInt32(12);
+                    a.UploadDateTime = reader.GetDateTime(13);
+                    a.UploadDateStr = reader.GetDateTime(13).ToShortDateString();
+                    a.UploadTimeStr = reader.GetDateTime(13).ToShortTimeString();
+                    a.AnswerStatusID = reader.GetInt32(14);
+                    a.AnswerStatusName = reader.GetString(15);
                     artworks.Add(a);
                 }
                 return artworks;
@@ -1032,7 +1255,7 @@ namespace DataAccessLayer
             List<Artworks> artworks = new List<Artworks>();
             try
             {
-                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.AgeRange_ID,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN Members AS AP ON AW.Approver_ID=AP.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID";
+                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.AgeRange_ID,AR.AgeRange,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN AgeRanges AS AR ON AW.AgeRange_ID=AR.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID";
                 cmd.Parameters.Clear();
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -1048,14 +1271,15 @@ namespace DataAccessLayer
                     a.UploaderName = reader.GetString(6);
                     a.UploaderUserName = reader.GetString(7);
                     a.AgeRangeID = reader.GetInt32(8);
-                    a.LikeCounts = !reader.IsDBNull(9) ? reader.GetInt32(9) : 0;
-                    a.DislikeCounts = !reader.IsDBNull(10) ? reader.GetInt32(10) : 0;
-                    a.ViewsCounts = reader.GetInt32(11);
-                    a.UploadDateTime = reader.GetDateTime(12);
-                    a.UploadDateStr = reader.GetDateTime(12).ToShortDateString();
-                    a.UploadTimeStr = reader.GetDateTime(12).ToShortTimeString();
-                    a.AnswerStatusID = reader.GetInt32(13);
-                    a.AnswerStatusName = reader.GetString(14);
+                    a.AgeRangeStr = reader.GetString(9);
+                    a.LikeCounts = !reader.IsDBNull(10) ? reader.GetInt32(10) : 0;
+                    a.DislikeCounts = !reader.IsDBNull(11) ? reader.GetInt32(11) : 0;
+                    a.ViewsCounts = reader.GetInt32(12);
+                    a.UploadDateTime = reader.GetDateTime(13);
+                    a.UploadDateStr = reader.GetDateTime(13).ToShortDateString();
+                    a.UploadTimeStr = reader.GetDateTime(13).ToShortTimeString();
+                    a.AnswerStatusID = reader.GetInt32(14);
+                    a.AnswerStatusName = reader.GetString(15);
                     artworks.Add(a);
                 }
                 return artworks;
@@ -1071,7 +1295,7 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.Approver_ID,AP.Name,AP.UserName,AW.AgeRange_ID,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.ApprovedDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN Members AS AP ON AW.Approver_ID=AP.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID WHERE AW.ID=@awid";
+                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.Approver_ID,AP.Name,AP.UserName,AW.AgeRange_ID,AR.AgeRange,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.ApprovedDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN Members AS AP ON AW.Approver_ID=AP.ID JOIN AgeRanges AS AR ON AW.AgeRange_ID=AR.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID WHERE AW.ID=@awid";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@awid", awid);
                 con.Open();
@@ -1091,17 +1315,18 @@ namespace DataAccessLayer
                     aw.ApproverName = reader.GetString(9);
                     aw.ApproverUserName = reader.GetString(10);
                     aw.AgeRangeID = reader.GetInt32(11);
-                    aw.LikeCounts = !reader.IsDBNull(12) ? reader.GetInt32(12) : 0;
-                    aw.DislikeCounts = !reader.IsDBNull(13) ? reader.GetInt32(13) : 0;
-                    aw.ViewsCounts = reader.GetInt32(14);
-                    aw.UploadDateTime = reader.GetDateTime(15);
-                    aw.UploadDateStr = reader.GetDateTime(15).ToShortDateString();
-                    aw.UploadTimeStr = reader.GetDateTime(15).ToShortTimeString();
-                    aw.ApprovedDateTime = !reader.IsDBNull(16) ? reader.GetDateTime(16) : reader.GetDateTime(15);
-                    aw.ApprovedDateStr = !reader.IsDBNull(16) ? reader.GetDateTime(16).ToShortDateString() : reader.GetDateTime(15).ToShortDateString();
-                    aw.ApprovedTimeStr = !reader.IsDBNull(16) ? reader.GetDateTime(16).ToShortTimeString() : reader.GetDateTime(15).ToShortTimeString();
-                    aw.AnswerStatusID = reader.GetInt32(17);
-                    aw.AnswerStatusName = reader.GetString(18);
+                    aw.AgeRangeStr = reader.GetString(12);
+                    aw.LikeCounts = !reader.IsDBNull(13) ? reader.GetInt32(13) : 0;
+                    aw.DislikeCounts = !reader.IsDBNull(14) ? reader.GetInt32(14) : 0;
+                    aw.ViewsCounts = reader.GetInt32(15);
+                    aw.UploadDateTime = reader.GetDateTime(16);
+                    aw.UploadDateStr = reader.GetDateTime(16).ToShortDateString();
+                    aw.UploadTimeStr = reader.GetDateTime(16).ToShortTimeString();
+                    aw.ApprovedDateTime = !reader.IsDBNull(17) ? reader.GetDateTime(17) : reader.GetDateTime(16);
+                    aw.ApprovedDateStr = !reader.IsDBNull(17) ? reader.GetDateTime(17).ToShortDateString() : reader.GetDateTime(16).ToShortDateString();
+                    aw.ApprovedTimeStr = !reader.IsDBNull(17) ? reader.GetDateTime(17).ToShortTimeString() : reader.GetDateTime(16).ToShortTimeString();
+                    aw.AnswerStatusID = reader.GetInt32(18);
+                    aw.AnswerStatusName = reader.GetString(19);
                 }
                 return aw;
 
@@ -1117,7 +1342,7 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.AgeRange_ID,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID WHERE AW.ID=@awid";
+                cmd.CommandText = "SELECT AW.ID,AW.Name,AW.Info,AW.ArtCategory_ID,AC.Name,AW.Uploader_ID,UP.Name,UP.UserName,AW.AgeRange_ID,AR.AgeRange,AW.LikeCounts,AW.DislikeCounts,AW.ViewsCounts,AW.UploadDateTime,AW.AnswerStatus_ID,Ans.Name FROM Artworks AS AW JOIN ArtCategories AS AC ON AW.ArtCategory_ID=AC.ID JOIN Members AS UP ON AW.Uploader_ID=UP.ID JOIN AgeRanges AS AR ON AW.AgeRange_ID=AR.ID JOIN AnswerStatus AS Ans ON AW.AnswerStatus_ID=Ans.ID WHERE AW.ID=@awid";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@awid", awid);
                 con.Open();
@@ -1134,14 +1359,15 @@ namespace DataAccessLayer
                     aw.UploaderName = reader.GetString(6);
                     aw.UploaderUserName = reader.GetString(7);
                     aw.AgeRangeID = reader.GetInt32(8);
-                    aw.LikeCounts = !reader.IsDBNull(9) ? reader.GetInt32(9) : 0;
-                    aw.DislikeCounts = !reader.IsDBNull(10) ? reader.GetInt32(10) : 0;
-                    aw.ViewsCounts = reader.GetInt32(11);
-                    aw.UploadDateTime = reader.GetDateTime(12);
-                    aw.UploadDateStr = reader.GetDateTime(12).ToShortDateString();
-                    aw.UploadTimeStr = reader.GetDateTime(12).ToShortTimeString();
-                    aw.AnswerStatusID = reader.GetInt32(13);
-                    aw.AnswerStatusName = reader.GetString(14);
+                    aw.AgeRangeStr = reader.GetString(9);
+                    aw.LikeCounts = !reader.IsDBNull(10) ? reader.GetInt32(10) : 0;
+                    aw.DislikeCounts = !reader.IsDBNull(11) ? reader.GetInt32(11) : 0;
+                    aw.ViewsCounts = reader.GetInt32(12);
+                    aw.UploadDateTime = reader.GetDateTime(13);
+                    aw.UploadDateStr = reader.GetDateTime(13).ToShortDateString();
+                    aw.UploadTimeStr = reader.GetDateTime(13).ToShortTimeString();
+                    aw.AnswerStatusID = reader.GetInt32(14);
+                    aw.AnswerStatusName = reader.GetString(15);
                 }
                 return aw;
 
@@ -1682,6 +1908,147 @@ namespace DataAccessLayer
             finally { con.Close(); }
         }
         #endregion
+        #region ArtworkImages Transactions
+        public ArtworkImages GetCoverImage()
+        {
+            try
+            {
+                cmd.CommandText = "SELECT ID,Artwork_ID,AltText,ImagePath,IsCover FROM ArtworkImages AS awi WHERE IsCover=1";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                ArtworkImages awi = new ArtworkImages();
+                while (reader.Read())
+                {
+                    awi.ID = reader.GetInt32(0);
+                    awi.ArtworkID = reader.GetInt32(1);
+                    awi.AltText = !reader.IsDBNull(2) ? reader.GetString(2) : "";
+                    awi.ImagePath = reader.GetString(3);
+                    awi.IsCover = reader.GetBoolean(4);
+                }
+                return awi;
+            }
+            catch
+            {
+
+                return null;
+            }
+            finally { con.Close(); }
+
+        }
+        public ArtworkImages GetCoverImageWithArtworkID(int awid)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT ID,Artwork_ID,AltText,ImagePath,IsCover FROM ArtworkImages AS awi WHERE IsCover=1 AND Artwork_ID=@awid";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@awid", awid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                ArtworkImages awi = new ArtworkImages();
+                while (reader.Read())
+                {
+                    awi.ID = reader.GetInt32(0);
+                    awi.ArtworkID = reader.GetInt32(1);
+                    awi.AltText = !reader.IsDBNull(2) ? reader.GetString(2) : "";
+                    awi.ImagePath = reader.GetString(3);
+                    awi.IsCover = reader.GetBoolean(4);
+                }
+                return awi;
+            }
+            catch
+            {
+
+                return null;
+            }
+            finally { con.Close(); }
+
+        }
+        public List<ArtworkImages> ListArtworkImages()
+        {
+            List<ArtworkImages> awimages = new List<ArtworkImages>();
+            try
+            {
+                cmd.CommandText = "SELECT ID,Artwork_ID,AltText,ImagePath,IsCover FROM ArtworkImages";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ArtworkImages awi = new ArtworkImages();
+                    awi.ID = reader.GetInt32(0);
+                    awi.ArtworkID = reader.GetInt32(1);
+                    awi.AltText = !reader.IsDBNull(2) ? reader.GetString(2) : "";
+                    awi.ImagePath = reader.GetString(3);
+                    awi.IsCover = reader.GetBoolean(4);
+                    awimages.Add(awi);
+                }
+                return awimages;
+            }
+            catch
+            {
+
+                return null;
+            }
+            finally { con.Close(); }
+        }
+        public List<ArtworkImages> ListArtworkImagesWithArtworkID(int awid)
+        {
+            List<ArtworkImages> awimages = new List<ArtworkImages>();
+            try
+            {
+                cmd.CommandText = "SELECT ID,Artwork_ID,AltText,ImagePath,IsCover FROM ArtworkImages WHERE Artwork_ID=@awid";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@awid", awid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ArtworkImages awi = new ArtworkImages();
+                    awi.ID = reader.GetInt32(0);
+                    awi.ArtworkID = reader.GetInt32(1);
+                    awi.AltText = !reader.IsDBNull(2) ? reader.GetString(2) : "";
+                    awi.ImagePath = reader.GetString(3);
+                    awi.IsCover = reader.GetBoolean(4);
+                    awimages.Add(awi);
+                }
+                return awimages;
+            }
+            catch
+            {
+
+                return null;
+            }
+            finally { con.Close(); }
+        }
+        public ArtworkImages GetArtworkImageByID(int awimgid)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT ID,Artwork_ID,AltText,ImagePath,IsCover FROM ArtworkImages WHERE ID=@awimgid";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@awimgid", awimgid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                ArtworkImages awi = new ArtworkImages();
+                while (reader.Read())
+                {
+                    awi.ID = reader.GetInt32(0);
+                    awi.ArtworkID = reader.GetInt32(1);
+                    awi.AltText = reader.GetString(2);
+                    awi.ImagePath = reader.GetString(3);
+                    awi.IsCover = reader.GetBoolean(4);
+                }
+                return awi;
+            }
+            catch
+            {
+
+                return null;
+            }
+            finally { con.Close(); }
+        }
+        #endregion
         #region Helper Transactions
         public bool dataControl(string table, string column, string data)
         {
@@ -1706,6 +2073,57 @@ namespace DataAccessLayer
             {
                 con.Close();
             }
+        }
+        public Members AdminLogin(string mail, string password)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT COUNT(*) FROM Members WHERE Email=@mail AND UserPassword=@password";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@mail", mail);
+                cmd.Parameters.AddWithValue("@password", password);
+                con.Open();
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count > 0)
+                {
+                    cmd.CommandText = "SELECT mem.ID,mem.Name,mem.Surname,mem.MembershipStatus_ID,ms.Name,mem.ProfilPhoto,mem.Info,mem.Email,mem.Birthday,mem.UserName,mem.UserPassword,mem.SecurityQestions_ID,sq.Qestions,mem.SecurityAnswer,mem.VisitorCounts,mem.RegistrationDate,mem.UserStatus FROM Members AS mem JOIN MembershipStatus AS ms ON mem.MembershipStatus_ID=ms.ID JOIN SecurityQestions AS sq ON mem.SecurityQestions_ID=sq.ID WHERE Email=@mail AND UserPassword=@password";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@mail", mail);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    Members mem = new Members();
+                    while (reader.Read())
+                    {
+                        mem.ID = reader.GetInt32(0);
+                        mem.Name = reader.GetString(1);
+                        mem.Surname = reader.GetString(2);
+                        mem.MembershipStatusID = reader.GetInt32(3);
+                        mem.MembershipStatusName = reader.GetString(4);
+                        mem.ProfilPhoto = !reader.IsDBNull(5) ? reader.GetString(5) : "none.png";
+                        mem.Info = reader.GetString(6);
+                        mem.Email = reader.GetString(7);
+                        mem.BirthdayStr = reader.GetDateTime(8).ToShortDateString();
+                        mem.UserName = reader.GetString(9);
+                        mem.UserPassword = reader.GetString(10);
+                        mem.SecurityQestionsID = reader.GetInt32(11);
+                        mem.SecurityQestionsQestion = reader.GetString(12);
+                        mem.SecurityAnswer = reader.GetString(13);
+                        mem.VisitorCounts = reader.GetInt32(14);
+                        mem.RegistrationDate = reader.GetDateTime(15);
+                        mem.RegistrationDateStr = reader.GetDateTime(15).ToShortDateString();
+                        mem.RegistrationTimeStr = reader.GetDateTime(15).ToShortTimeString();
+                        mem.UserStatus = reader.GetBoolean(16);
+                    }
+                    return mem;
+
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            finally { con.Close(); }
         }
         #endregion
     }

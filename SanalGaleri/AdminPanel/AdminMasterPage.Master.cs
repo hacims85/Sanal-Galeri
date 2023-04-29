@@ -10,14 +10,26 @@ namespace SanalGaleri.AdminPanel
 {
     public partial class AdminMasterPage : System.Web.UI.MasterPage
     {
-        DataModel dm=new DataModel();
+        DataModel dm = new DataModel();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Member"] != null)
+            {
+                Members mem = (Members)Session["Member"];
+                lbl_user.Text = mem.UserName + " (" + mem.MembershipStatusName + ")";
 
+
+            }
+            else
+            {
+                Response.Redirect("AdminLoginPage.aspx");
+            }
         }
 
         protected void lbtn_exit_Click(object sender, EventArgs e)
         {
+            Session["Member"] = null;
+            Response.Redirect("AdminLoginPage.aspx");
 
         }
     }

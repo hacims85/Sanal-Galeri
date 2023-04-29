@@ -20,6 +20,7 @@ namespace DataAccessLayer
         public string ApproverName { get; set; }
         public string ApproverUserName { get; set; }
         public int AgeRangeID { get; set; }
+        public string AgeRangeStr { get; set; }
         public int LikeCounts { get; set; }
         public int DislikeCounts { get; set; }
         public int ViewsCounts { get; set; }

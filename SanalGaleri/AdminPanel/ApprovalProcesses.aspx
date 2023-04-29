@@ -40,7 +40,7 @@
                         <td>
                             <asp:LinkButton ID="lbtn_approve" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="approve">Onayla</asp:LinkButton>
                             <asp:LinkButton ID="lbtn_reject" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="reject">Reddet</asp:LinkButton>
-                            <a href='CommentDetail.aspx?cid=<%# Eval("ID") %>' target="_blank">Detaylar</a>
+                            <a href='CommentDetails.aspx?cid=<%# Eval("ID") %>' target="_blank">Detaylar</a>
                         </td>
                     </tr>
                 </ItemTemplate>

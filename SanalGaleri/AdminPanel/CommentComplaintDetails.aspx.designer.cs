@@ -11,7 +11,7 @@ namespace SanalGaleri.AdminPanel
 {
 
 
-    public partial class ArtworkDetails
+    public partial class CommentComplaintDetails
     {
 
         /// <summary>
@@ -24,6 +24,24 @@ namespace SanalGaleri.AdminPanel
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// lbl_commentTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_commentTitle;
+
+        /// <summary>
+        /// lbl_answerTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_answerTitle;
+
+        /// <summary>
         /// ltrl_ID control.
         /// </summary>
         /// <remarks>
@@ -33,75 +51,66 @@ namespace SanalGaleri.AdminPanel
         protected global::System.Web.UI.WebControls.Literal ltrl_ID;
 
         /// <summary>
-        /// ltrl_artworkCategoriesName control.
+        /// lbl_commentComplaint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_artworkCategoriesName;
+        protected global::System.Web.UI.WebControls.Label lbl_commentComplaint;
 
         /// <summary>
-        /// ltrl_uploaderUserName control.
+        /// lbl_ansverComplaint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_uploaderUserName;
+        protected global::System.Web.UI.WebControls.Label lbl_ansverComplaint;
 
         /// <summary>
-        /// ltrl_UploadDate control.
+        /// ltrl_commentID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_UploadDate;
+        protected global::System.Web.UI.WebControls.Literal ltrl_commentID;
 
         /// <summary>
-        /// img_coverIMG control.
+        /// ltrl_conplainantUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image img_coverIMG;
+        protected global::System.Web.UI.WebControls.Literal ltrl_conplainantUserName;
 
         /// <summary>
-        /// rp_awi control.
+        /// ltrl_conplainantDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rp_awi;
+        protected global::System.Web.UI.WebControls.Literal ltrl_conplainantDate;
 
         /// <summary>
-        /// ltrl_name control.
+        /// ltrl_complaintReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_name;
+        protected global::System.Web.UI.WebControls.Literal ltrl_complaintReason;
 
         /// <summary>
-        /// ltrl_ageRange control.
+        /// ltrl_explanation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_ageRange;
-
-        /// <summary>
-        /// ltrl_info control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_info;
+        protected global::System.Web.UI.WebControls.Literal ltrl_explanation;
     }
 }

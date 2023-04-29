@@ -23,7 +23,16 @@ body, html {
 
 .UserInfo {
     padding: 45px 10px;
+
 }
+
+    .UserInfo .usernameLabel {
+        color: whitesmoke;
+        padding: 10px;
+        font-weight:900;
+        margin-right:10px;
+        font-size:17pt;
+    }
 
     .UserInfo a {
         text-decoration: none;
@@ -235,18 +244,36 @@ h2 {
         width: 300px;
     }
 
+.artworkimages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+    .artworkimages img {
+        width: 200px;
+        margin: 10px;
+    }
+
 .detailPageContainer {
     width: 50%;
     margin: 20px auto;
     border: 1px solid silver;
 }
 
-    .detailPageContainer .commentNumbers {
+    .detailPageContainer .basicKnowledge {
         margin: 5px 10px;
         font-size: 20pt;
+    }
+
+    .detailPageContainer .uploaddate {
+        margin-top: 15px;
+        text-align: end;
     }
 
     .detailPageContainer .detailPageContent {
         margin: 40px 45px;
         border: 1px solid gray;
+        padding: 20px;
+        font-size: 20pt;
     }

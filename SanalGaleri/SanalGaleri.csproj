@@ -73,6 +73,7 @@
     <Content Include="AdminPanel\AddComplaintReasons.aspx" />
     <Content Include="AdminPanel\AddSecurityQestions.aspx" />
     <Content Include="AdminPanel\AdminLoginPage.aspx" />
+    <Content Include="AdminPanel\ArtworkComplaintDetails.aspx" />
     <Content Include="AdminPanel\ArtworkDetails.aspx" />
     <Content Include="AdminPanel\Assets\Css\AdminLoginCss.css" />
     <Content Include="AdminPanel\Assets\Css\MainLayout.css" />
@@ -2133,7 +2134,8 @@
     <Content Include="AdminPanel\Assets\Fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="AdminPanel\Assets\Fontawesome\svgs\solid\z.svg" />
     <Content Include="AdminPanel\Assets\images\Logo.png" />
-    <Content Include="AdminPanel\CommentDetail.aspx" />
+    <Content Include="AdminPanel\CommentComplaintDetails.aspx" />
+    <Content Include="AdminPanel\CommentDetails.aspx" />
     <Content Include="AdminPanel\ComplaintsProcesses.aspx" />
     <Content Include="AdminPanel\Default.aspx" />
     <Content Include="AdminPanel\ApprovalProcesses.aspx" />
@@ -2190,6 +2192,13 @@
     <Compile Include="AdminPanel\AdminMasterPage.Master.designer.cs">
       <DependentUpon>AdminMasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="AdminPanel\ArtworkComplaintDetails.aspx.cs">
+      <DependentUpon>ArtworkComplaintDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\ArtworkComplaintDetails.aspx.designer.cs">
+      <DependentUpon>ArtworkComplaintDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminPanel\ArtworkDetails.aspx.cs">
       <DependentUpon>ArtworkDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2197,12 +2206,19 @@
     <Compile Include="AdminPanel\ArtworkDetails.aspx.designer.cs">
       <DependentUpon>ArtworkDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminPanel\CommentDetail.aspx.cs">
-      <DependentUpon>CommentDetail.aspx</DependentUpon>
+    <Compile Include="AdminPanel\CommentComplaintDetails.aspx.cs">
+      <DependentUpon>CommentComplaintDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminPanel\CommentDetail.aspx.designer.cs">
-      <DependentUpon>CommentDetail.aspx</DependentUpon>
+    <Compile Include="AdminPanel\CommentComplaintDetails.aspx.designer.cs">
+      <DependentUpon>CommentComplaintDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\CommentDetails.aspx.cs">
+      <DependentUpon>CommentDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\CommentDetails.aspx.designer.cs">
+      <DependentUpon>CommentDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminPanel\ComplaintsProcesses.aspx.cs">
       <DependentUpon>ComplaintsProcesses.aspx</DependentUpon>

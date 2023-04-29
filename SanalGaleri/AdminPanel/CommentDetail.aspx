@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
         <h2>Yorum Detayı</h2>
         <div class="detailPageContainer">
-            <div class="commentNumbers">
+            <div class="basicKnowledge">
                 Yorum No:
                 <asp:Literal ID="ltrl_ID" runat="server"></asp:Literal>
                 ||
@@ -29,7 +29,6 @@
                 <h4>İçerik :</h4>
                 <asp:Literal ID="ltrl_content" runat="server"></asp:Literal>
             </div>
-
         </div>
     </form>
 </body>

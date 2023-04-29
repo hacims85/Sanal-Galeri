@@ -17,7 +17,7 @@
             <div style="clear: both"></div>
         </div>
         <div class="comments">
-            <asp:ListView ID="lv_comments" runat="server" Visible="false">
+            <asp:ListView ID="lv_comments" runat="server" Visible="false" OnItemCommand="lv_comments_ItemCommand">
                 <LayoutTemplate>
                     <table border="1" class="table" cellpadding="0" cellspacing="0">
                         <thead>
@@ -40,14 +40,16 @@
                     <tr>
                         <td><%# Eval("ID") %></td>
                         <td><%# Eval("ComplaintReason") %></td>
-                        <td><%# Eval("CommentID") %></td>
+                        <td><a href='CommentDetails.aspx?cid=<%# Eval("CommentID") %>' target="_blank">
+                            <%# Eval("CommentID") %>
+                        </a></td>
                         <td><%# Eval("ComplainantUserName") %></td>
                         <td><%# Eval("ComplainantDateStr") %></td>
                         <td><%# Eval("ComplainantTimeStr") %></td>
                         <td>
-                            <a href="#">Onayla</a>
-                            <a href="#">Reddet</a>
-                            <a href="#">Detaylar</a>
+                            <asp:LinkButton ID="lbtn_approve" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="approve">Onayla</asp:LinkButton>
+                            <asp:LinkButton ID="lbtn_reject" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="reject">Reddet</asp:LinkButton>
+                            <a href='CommentComplaintDetails.aspx?comid=<%# Eval("ID") %>' target="_blank">Detaylar</a>
                         </td>
                     </tr>
                 </ItemTemplate>
@@ -77,14 +79,14 @@
                     <tr>
                         <td><%# Eval("ID") %></td>
                         <td><%# Eval("ComplaintReason") %></td>
-                        <td><%# Eval("ArtworkID") %></td>
+                        <td><a href='ArtworkDetails.aspx?awid=<%# Eval("ArtworkID") %>' target="_blank"><%# Eval("ArtworkID") %></a></td>
                         <td><%# Eval("ComplainantUserName") %></td>
                         <td><%# Eval("ComplainantDateStr") %></td>
                         <td><%# Eval("ComplainantTimeStr") %></td>
                         <td>
-                            <a href="#">Onayla</a>
-                            <a href="#">Reddet</a>
-                            <a href="#">Detaylar</a>
+                            <asp:LinkButton ID="lbtn_approve" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="approve">Onayla</asp:LinkButton>
+                            <asp:LinkButton ID="lbtn_reject" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="reject">Reddet</asp:LinkButton>
+                            <a href='ArtworkComplaintDetails.aspx?comid=<%# Eval("ID") %>' target="_blank">Detaylar</a>
                         </td>
                     </tr>
                 </ItemTemplate>

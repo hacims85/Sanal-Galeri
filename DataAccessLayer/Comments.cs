@@ -30,5 +30,6 @@ namespace DataAccessLayer
         public string ApprovedTimeStr { get; set; }
         public int AnswerStatusID { get; set; }
         public string AnswerStatusName { get; set; }
+        public bool CommentStatus { get; set; }
     }
 }

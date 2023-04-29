@@ -24,7 +24,7 @@
                 <h1>SANAL GALERİ</h1>
             </div>
             <div class="UserInfo">
-                <asp:Label ID="lbl_user" runat="server"></asp:Label>
+                <asp:Label ID="lbl_user" runat="server" CssClass="usernameLabel"></asp:Label>
                 <asp:LinkButton ID="lbtn_exit" runat="server" OnClick="lbtn_exit_Click">Çıkış</asp:LinkButton>
             </div>
         </div>

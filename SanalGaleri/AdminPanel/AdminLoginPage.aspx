@@ -16,6 +16,10 @@
                     <h1>Admin Login</h1>
                     <div style="border-top: 1px solid white; margin-bottom: 3px;"></div>
                     <div style="border-top: 3px solid white"></div>
+                    <asp:Panel ID="pnl_mistake" runat="server" CssClass="messageBox" Visible="false">
+                        <i class="fa-sharp fa-regular fa-hand"></i>
+                        <asp:Label ID="lbl_mistake" runat="server">DENEME</asp:Label>
+                    </asp:Panel>
                 </div>
                 <div class="row" style="margin-top: 40px;">
                     <asp:TextBox CssClass="inputbox" ID="tb_mail" runat="server"></asp:TextBox><span><i class="fa-solid fa-user"></i></span>
@@ -26,12 +30,12 @@
                     <div class="forgetPassword">
                         <a href="#">Şifremi Unuttum</a>
                     </div>
-                    <asp:LinkButton ID="lbtn_loginBtn" CssClass="loginBtn" runat="server">Giriş yap</asp:LinkButton>
+                    <asp:LinkButton ID="lbtn_loginBtn" CssClass="loginBtn" runat="server" OnClick="lbtn_loginBtn_Click">Giriş yap</asp:LinkButton>
 
                 </div>
 
                 <br />
-                <div class="row" style="margin-left:20px;">
+                <div class="row" style="margin-left: 20px;">
                     <div style="border-top: 3px solid white; margin-bottom: 3px; width: 470px"></div>
                     <div style="border-top: 1px solid white; width: 470px"></div>
                 </div>

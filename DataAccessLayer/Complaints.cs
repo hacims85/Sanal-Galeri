@@ -14,6 +14,7 @@ namespace DataAccessLayer
         public string ComplaintReason { get; set; }
         public int CommentID { get; set; }
         public string CommentContent { get; set; }
+        public bool CommentStatus { get; set; }
         public int ArtworkID { get; set; }
         public string ArtworkName { get; set; }
         public int MemberID { get; set; }

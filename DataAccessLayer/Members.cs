@@ -21,6 +21,7 @@ namespace DataAccessLayer
         public string UserName { get; set; }
         public string UserPassword { get; set; }
         public int SecurityQestionsID { get; set; }
+        public string SecurityQestionsQestion { get; set; }
         public string SecurityAnswer { get; set; }
         public int VisitorCounts { get; set; }
         public DateTime RegistrationDate { get; set; }

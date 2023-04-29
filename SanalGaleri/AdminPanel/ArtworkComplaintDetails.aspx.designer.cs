@@ -11,7 +11,7 @@ namespace SanalGaleri.AdminPanel
 {
 
 
-    public partial class ArtworkDetails
+    public partial class ArtworkComplaintDetails
     {
 
         /// <summary>
@@ -33,75 +33,48 @@ namespace SanalGaleri.AdminPanel
         protected global::System.Web.UI.WebControls.Literal ltrl_ID;
 
         /// <summary>
-        /// ltrl_artworkCategoriesName control.
+        /// ltrl_artworkID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_artworkCategoriesName;
+        protected global::System.Web.UI.WebControls.Literal ltrl_artworkID;
 
         /// <summary>
-        /// ltrl_uploaderUserName control.
+        /// ltrl_conplainantUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_uploaderUserName;
+        protected global::System.Web.UI.WebControls.Literal ltrl_conplainantUserName;
 
         /// <summary>
-        /// ltrl_UploadDate control.
+        /// ltrl_conplainantDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_UploadDate;
+        protected global::System.Web.UI.WebControls.Literal ltrl_conplainantDate;
 
         /// <summary>
-        /// img_coverIMG control.
+        /// ltrl_complaintReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image img_coverIMG;
+        protected global::System.Web.UI.WebControls.Literal ltrl_complaintReason;
 
         /// <summary>
-        /// rp_awi control.
+        /// ltrl_explanation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rp_awi;
-
-        /// <summary>
-        /// ltrl_name control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_name;
-
-        /// <summary>
-        /// ltrl_ageRange control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_ageRange;
-
-        /// <summary>
-        /// ltrl_info control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrl_info;
+        protected global::System.Web.UI.WebControls.Literal ltrl_explanation;
     }
 }

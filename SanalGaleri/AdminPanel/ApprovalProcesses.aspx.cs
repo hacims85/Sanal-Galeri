@@ -11,6 +11,7 @@ namespace SanalGaleri
     public partial class ApprovalProcesses : System.Web.UI.Page
     {
         DataModel dm = new DataModel();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -35,11 +36,12 @@ namespace SanalGaleri
 
         protected void lv_comments_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
+            Members mem = (Members)Session["Member"];
             if (e.CommandName == "approve")
             {
                 int id = Convert.ToInt32(e.CommandArgument.ToString());
                 Comments c = dm.GetCommentsNotAccepted(id);
-                c.ApproverID = 1;
+                c.ApproverID = mem.ID;
                 c.ApprovedDate = DateTime.Now;
                 c.AnswerStatusID = 2;
                 if (dm.UpdateComments(c))
@@ -54,7 +56,7 @@ namespace SanalGaleri
             {
                 int cid = Convert.ToInt32(e.CommandArgument);
                 Comments c = dm.GetCommentsNotAccepted(cid);
-                c.ApproverID = 1;
+                c.ApproverID = mem.ID;
                 c.ApprovedDate = DateTime.Now;
                 c.AnswerStatusID = 3;
                 if (dm.UpdateComments(c))
@@ -70,11 +72,12 @@ namespace SanalGaleri
 
         protected void lv_artworks_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
+            Members mem = (Members)Session["Member"];
             if (e.CommandName == "approve")
             {
                 int awid = Convert.ToInt32(e.CommandArgument);
                 Artworks aw = dm.GetArtworksNotAccepted(awid);
-                aw.ApproverID = 1;
+                aw.ApproverID = mem.ID;
                 aw.ApprovedDateTime = DateTime.Now;
                 aw.AnswerStatusID = 2;
                 if (dm.UpdateArtwork(aw))
@@ -90,7 +93,7 @@ namespace SanalGaleri
             {
                 int awid = Convert.ToInt32(e.CommandArgument);
                 Artworks aw = dm.GetArtworksNotAccepted(awid);
-                aw.ApproverID = 1;
+                aw.ApproverID = mem.ID;
                 aw.ApprovedDateTime = DateTime.Now;
                 aw.AnswerStatusID = 3;
                 if (dm.UpdateArtwork(aw))

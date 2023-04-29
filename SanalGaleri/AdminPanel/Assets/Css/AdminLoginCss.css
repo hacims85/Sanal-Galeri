@@ -30,6 +30,24 @@ body {
                 font-family: 'Michroma', sans-serif;
             }
 
+            .adminPanelLogin .container .title .messageBox {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                padding: 20px;
+                border: 1px solid #002333;
+                background: rgb(190,23,23);
+                background: -moz-linear-gradient(90deg, rgba(190,23,23,1) 41%, rgba(28,29,29,1) 62%);
+                background: -webkit-linear-gradient(90deg, rgba(190,23,23,1) 41%, rgba(28,29,29,1) 62%);
+                background: linear-gradient(90deg, rgba(190,23,23,1) 41%, rgba(28,29,29,1) 62%);
+                color: whitesmoke;
+                border-radius: 2px;
+                width: 430px;
+            }
+
+                .adminPanelLogin .container .title .messageBox i {
+                    margin-right: 30px;
+                }
+
         .adminPanelLogin .container .row {
             text-align: center;
             margin-bottom: 40px;
